@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+ratata:
+  name: Ratata
+  description: Hola soy Ratata
+
+caterpie:
+  name: Caterpie
+  description: Hola soy Caterpie
