@@ -1,10 +1,11 @@
 class PokeUsersController < ApplicationController
-  before_action :set_poke_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_poke_user, only: [:show, :edit, :update, :destroy, :lvlup]
   before_action :authenticate_user!
   # GET /poke_users
   # GET /poke_users.json
   def index
-    @poke_users = current_user.poke_users
+    @user = User.find(params[:user_id])
+    @poke_users = @user.poke_users
   end
 
   # GET /poke_users/1
@@ -25,10 +26,11 @@ class PokeUsersController < ApplicationController
   # POST /poke_users.json
   def create
     @poke_user = PokeUser.new(poke_user_params)
+    @poke_user.user = current_user
 
     respond_to do |format|
       if @poke_user.save
-        format.html { redirect_to @poke_user, notice: 'Poke user was successfully created.' }
+        format.html { redirect_to user_poke_users_path(current_user), notice: 'Poke user was successfully created.' }
         format.json { render :show, status: :created, location: @poke_user }
       else
         format.html { render :new }
@@ -61,6 +63,11 @@ class PokeUsersController < ApplicationController
     end
   end
 
+  def lvlup
+    @poke_user.level += 1
+    @poke_user.save
+    redirect_to user_poke_users_path(current_user)
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_poke_user
@@ -69,6 +76,6 @@ class PokeUsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def poke_user_params
-      params.require(:poke_user).permit(:level)
+      params.require(:poke_user).permit(:level, :pokemon_id)
     end
 end

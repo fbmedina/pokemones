@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   get 'pages/landing'
 
   devise_for :users, controllers: {
@@ -6,9 +7,19 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
   resources :pokemons
-
   resources :poke_users
+
   root 'pages#landing'
+
+  resources :users, only: [:index] do
+    resources :poke_users, only: [:index] do
+      member do
+        get 'lvlup'
+      end
+    end
+  end
+
+  # get 'users/:id/poke_users', to: "poke_users#index", as: "users_poke_user"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
