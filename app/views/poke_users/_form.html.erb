@@ -1,0 +1,21 @@
+<%= form_for(@poke_user) do |f| %>
+  <% if @poke_user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@poke_user.errors.count, "error") %> prohibited this poke_user from being saved:</h2>
+
+      <ul>
+      <% @poke_user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :level %><br>
+    <%= f.text_field :level %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

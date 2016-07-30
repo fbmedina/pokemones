@@ -1,0 +1,1 @@
+json.array! @poke_users, partial: 'poke_users/poke_user', as: :poke_user

@@ -1,0 +1,1 @@
+json.partial! "poke_users/poke_user", poke_user: @poke_user

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Poke Users</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Level</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @poke_users.each do |poke_user| %>
+      <tr>
+        <td><%= poke_user.pokemon.name %></td>
+        <td><%= poke_user.pokemon.description %></td>
+        <td><%= poke_user.level %></td>
+        <td><%= link_to 'Show', poke_user %></td>
+        <td><%= link_to 'Edit', edit_poke_user_path(poke_user) %></td>
+        <td><%= link_to 'Destroy', poke_user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Poke user', new_poke_user_path %>
